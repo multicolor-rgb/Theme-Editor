@@ -94,6 +94,19 @@ var editor = CodeMirror.fromTextArea(document.getElementById("editors"), {
    
 });
 </script>
+
+
+	
+<div class="text-light bg-dark" style="padding:20px;text-align:center;box-sizing:border-box;margin-top:20px;" id="paypal">
+
+<p>If you want support my work, and you want to see new plugins:) </p>
+
+<a href="https://www.paypal.com/donate/?hosted_button_id=TW6PXVCTM5A72">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif"  />
+</a>
+
+
+</div>
 ';
 
 echo $script;
