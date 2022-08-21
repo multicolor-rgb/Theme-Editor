@@ -27,6 +27,8 @@
          
          ';
          
+
+         
 $formget = '
        <h3>ThemeEditor</h3>
        <div class="bg-primary text-light mb-2 border p-3 lead">You edit <b>'.$site->theme().'</b> theme files. If you want edit different, activate another theme.</div>
@@ -44,10 +46,10 @@ foreach (glob($dir.'/{,*/,*/*/,*/*/*/}*{.php,.js,.css}',GLOB_BRACE) as $files) {
     $newfiles = str_replace('/','\  ',$files);
     $newerfiles = str_replace(' ','',$newfiles);
      
- $basename = str_replace($root.$site->theme(),"",$newerfiles);
+ $basenames = str_replace($dir,"",$files);
   
 
-    echo '<option value="'.$newerfiles.'" '.($_GET['edited']===$newerfiles ? "selected":"").'>'.$basename.'</option>';
+    echo '<option value="'.$files.'" '.($_GET['edited']===$newerfiles ? "selected":"").'>'.$basenames.'</option>';
 
     
 
