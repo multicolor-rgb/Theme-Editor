@@ -115,7 +115,7 @@ $brander = str_replace(' ','',$brand);
 $formsubmit = '<form method="post" >
 <input type="hidden" id="jstokenCSRF" name="tokenCSRF" value="'.$tokenCSRF.'">
 
-<textarea name="editors" id="editors" style="width:100%;height:80vh;">'.@file_get_contents($brander).'</textarea>
+<textarea name="editors" id="editors" style="width:100%;height:80vh;">'.@file_get_contents(PATH_THEMES.@$_GET["themename"].@$_GET["edited"]).'</textarea>
 <input name="dir" type="hidden" value="'.$brander.'"><br>
 <div class="bg-light border p-3">
 <input type="submit" name="saveedit" value="Save changes 💾" class="btn btn-primary col-md-2">
