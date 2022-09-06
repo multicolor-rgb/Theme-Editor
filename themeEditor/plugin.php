@@ -127,7 +127,7 @@ echo $formsubmit;
  
 
 if(isset($_POST['saveedit'])){
-file_put_contents($_POST['dir'],$_POST['editors']);
+file_put_contents(PATH_THEMES.@$_GET["themename"].@$_GET["edited"],$_POST['editors']);
 echo "<meta http-equiv='refresh' content='0'>";
 }
 
