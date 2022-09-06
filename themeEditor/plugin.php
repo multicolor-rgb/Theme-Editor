@@ -63,6 +63,8 @@ echo '
 
          echo '</select>';
 
+         if(isset($_GET['themename'])){
+
 
          echo '
          <p class="mb-2">Choose file</p>
@@ -79,10 +81,16 @@ foreach (glob(PATH_THEMES.@$_GET["themename"].'/{,*/,*/*/,*/*/*/}*{.php,.js,.css
  
 }
 
-echo '</select>
+
+
+         }
+
+
+         echo '</select>
 <input type="submit" name="edit" value="Edit File 📄"  class="btn btn-primary d-inline-block edit mt-2 col-md-2 ">
 </div>
 </form>';
+
 
 echo '
 
