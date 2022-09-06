@@ -68,12 +68,12 @@ echo '
          <p class="mb-2">Choose file</p>
          <select name="edited" class="edited form-control mb-2 " style="width:100%;display:inline-block;padding:5px;box-sizing:border-box;">';
          
-foreach (glob($dir.'/{,*/,*/*/,*/*/*/}*{.php,.js,.css}',GLOB_BRACE) as $files) {
+foreach (glob(PATH_THEMES.@$_GET["themename"].'/{,*/,*/*/,*/*/*/}*{.php,.js,.css}',GLOB_BRACE) as $files) {
     
     $newfiles = str_replace('/','\  ',$files);
     $newerfiles = str_replace(' ','',$newfiles);
      
- $basenames = str_replace($dir,"",$files);
+ $basenames = str_replace(PATH_THEMES.@$_GET["themename"],"",$files);
  
     echo '<option value="'.$basenames.'" >'.$basenames.'</option>';
  
