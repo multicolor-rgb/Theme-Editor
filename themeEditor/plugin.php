@@ -24,22 +24,49 @@
 
 
          </style>
-         
+         <h3>ThemeEditor</h3>         
+         <br>
          ';
          
 
+
+         if(isset($_GET["themename"])){
+          echo '
+            <div class="bg-primary text-light mb-2 border p-3 lead">You edit <b>'.$_GET["themename"].'</b> theme files . </div>';
+         }
+
          
-$formget = '
-       <h3>ThemeEditor</h3>
-       <div class="bg-primary text-light mb-2 border p-3 lead">You edit <b>'.$site->theme().'</b> theme files. If you want edit different, activate another theme.</div>
-<form method="get" >
-         <div  class="bg-light d-flex border p-3">
+echo '
+    
+<form method="get">
+         <div  class="bg-light d-block border p-3">
       
          ';
+ 
 
-         echo $formget;
 
-         echo '<select name="edited" class="edited form-control" style="width:90%;display:inline-block;padding:5px;box-sizing:border-box;">';
+
+         echo '
+         <p class="mb-2">Choose theme</p>
+
+         <select name="themename" class="form-control d-block themename my-2">';
+
+         
+        foreach (glob(PATH_THEMES.'/*',GLOB_BRACE) as $folder) {
+    
+         $basenames = str_replace(PATH_THEMES,"",$folder);
+         $newbasenames = str_replace('/','',$basenames);
+         
+            echo '<option value="'.$newbasenames.'" >'.$newbasenames.'</option>';
+         
+        };
+
+         echo '</select>';
+
+
+         echo '
+         <p class="mb-2">Choose file</p>
+         <select name="edited" class="edited form-control mb-2 " style="width:100%;display:inline-block;padding:5px;box-sizing:border-box;">';
          
 foreach (glob($dir.'/{,*/,*/*/,*/*/*/}*{.php,.js,.css}',GLOB_BRACE) as $files) {
     
@@ -47,28 +74,43 @@ foreach (glob($dir.'/{,*/,*/*/,*/*/*/}*{.php,.js,.css}',GLOB_BRACE) as $files) {
     $newerfiles = str_replace(' ','',$newfiles);
      
  $basenames = str_replace($dir,"",$files);
-  
-
-    echo '<option value="'.$files.'" '.($_GET['edited']===$newerfiles ? "selected":"").'>'.$basenames.'</option>';
-
-    
-
+ 
+    echo '<option value="'.$basenames.'" >'.$basenames.'</option>';
+ 
 }
 
 echo '</select>
-<input type="submit" style="width:10%;" name="edit" value="Edit File"  class="btn btn-primary d-inline-block edit">
+<input type="submit" name="edit" value="Edit File 📄"  class="btn btn-primary d-inline-block edit mt-2 col-md-2 ">
 </div>
 </form>';
 
+echo '
+
+<script>
+const edited = "'.@$_GET["edited"].'";
+const themename = "'.@$_GET["themename"].'";
+document.querySelector(".edited").value = edited;
+document.querySelector(".themename").value = themename;
+
+</script>
+
+
+';
+
+
+ $branddir = PATH_THEMES.@$_GET["themename"].@$_GET['edited'];
+$brand = str_replace('/','\  ',$branddir);
+$brander = str_replace(' ','',$brand);
+ 
 
 
 $formsubmit = '<form method="post" >
 <input type="hidden" id="jstokenCSRF" name="tokenCSRF" value="'.$tokenCSRF.'">
 
-<textarea name="editors" id="editors" style="width:100%;height:80vh;">'.@file_get_contents($_GET['edited']).'</textarea>
-<input name="dir" type="hidden" value="'.$_GET['edited'].'"><br>
+<textarea name="editors" id="editors" style="width:100%;height:80vh;">'.@file_get_contents($brander).'</textarea>
+<input name="dir" type="hidden" value="'.$brander.'"><br>
 <div class="bg-light border p-3">
-<input type="submit" name="saveedit" value="Save changes" class="btn btn-primary ">
+<input type="submit" name="saveedit" value="Save changes 💾" class="btn btn-primary col-md-2">
 </div>
 </form>';
 
